@@ -1,58 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:second_app/screens/myContentView.dart';
+import 'package:second_app/screens/myJson.dart';
 
-class Art extends StatelessWidget{
+class Art extends StatefulWidget{
+  _ArtState createState() => _ArtState();
+}
+
+class _ArtState extends State<Art>{
   final String appTitle = 'Arts & Culture';
+  List<MyJson> list = List<MyJson>();
+
+  @override
+  void initState() {
+    super.initState();
+    list.addAll([
+      MyJson(name: 'London', image: 'assets/botanical.jpg'),
+      MyJson(name: 'America', image: 'assets/national.jpg'),
+      MyJson(name: 'Germany', image: 'assets/crystal.jpg'),
+      MyJson(name: 'Canada', image: 'assets/brazil.jpg'),
+    ]);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(appTitle),),
+      appBar: AppBar(leading: Icon(Icons.my_location),
+        title: Text(appTitle),
+        backgroundColor: Color(0xFF2a2e43)),
       body: Material(
         child: ListView(
           children: <Widget>[
             Padding(
               padding: EdgeInsets.all(10),
-              child: myContent(),
+              child: MyView(list),
             )
           ],
         ),
       ),
     );
-  }
-
-  myContent(){
-    return Wrap(
-              direction: Axis.horizontal,
-              spacing: 20,
-              runSpacing: 20,
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Container(
-                    width: 180,
-                    height: 200,
-                    color: Colors.red,
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          width: 180,
-                          height: 130,
-                          color: Colors.yellow,
-                          child: Image(
-                            fit: BoxFit.scaleDown,
-                            image: AssetImage('assets/botanical.jpg'),
-                          ),
-                        ),
-                        Container(
-                          width: 180,
-                          height: 70,
-                          color: Colors.green,
-                          child: Center(child: Text('Colro', overflow: TextOverflow.fade,),),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            );
   }
 }

@@ -74,3 +74,6 @@ lib/calculator.dart
 lib/note_details.dart
 lib/note_list.dart
 lib/screens/myView.dart
+lib/del.dart
+lib/items.json
+lib/mymap.dart

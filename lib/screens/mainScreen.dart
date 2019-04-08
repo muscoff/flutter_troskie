@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_app/screens/restaurant.dart';
-import 'package:second_app/screens/art.dart';
+import 'package:second_app/screens/category.dart';
 
 class MainScreen extends StatefulWidget{
   _MainScreenState createState() => _MainScreenState();
@@ -9,10 +9,9 @@ class MainScreen extends StatefulWidget{
 class _MainScreenState extends State<MainScreen>{
 
   List<String> station = List<String>();
-  List<String> destination = List<String>();
+  //List<String> destination = List<String>();
   String stationValue, destinationValue;
   final GlobalKey<ScaffoldState> _scaffold = GlobalKey<ScaffoldState>();
-
 
   @override
   void initState(){
@@ -20,13 +19,6 @@ class _MainScreenState extends State<MainScreen>{
     station.addAll(['Madina', 'Lapaz', '37 Station', 'Tema-Station', 'Nkrumah Circle', 'Kaneshie',
     'Achimota', 'Accra Mall', 'Shangrila']);
 
-    destination.addAll(['Dr Kwame Nkrumah Museum', 'James Town LightHouse','National Museum',
-    'National Theatre','University of Ghana','Memorial Centre of African Culture',
-    'Independence Square And Arch', 'Usser Fort and Museum','Osu Castle','Legon Botanical Garden',
-    'Crystal Park','Memory Lane Park']);
-
-    destinationValue =destination[0];
-    stationValue =station[0]; 
   }
 
   
@@ -34,7 +26,7 @@ class _MainScreenState extends State<MainScreen>{
     return SafeArea(
       child: Scaffold(
         key: _scaffold,
-        bottomNavigationBar: bottomNav(onHome, goRestaurant, goArt),
+        bottomNavigationBar: bottomNav(onHome, goRestaurant, goCategory),
       body: Material(
         child: ListView(
           children: <Widget>[
@@ -130,20 +122,14 @@ class _MainScreenState extends State<MainScreen>{
     setState(() {
      stationValue = value; 
     });
-    if(value.isEmpty && destinationValue.isEmpty || value.isEmpty & destinationValue.isNotEmpty)return;
-    _scaffold.currentState.showSnackBar(SnackBar(
-      content: Text(value),
-    ));
+    _scaffold.currentState.showSnackBar(SnackBar(content: Text(value),));
   }
 
   void onDestination(String value){
+    //_scaffold.currentState.showSnackBar(SnackBar(content: Text(value),));
     setState(() {
      destinationValue = value; 
     });
-    if(value.isEmpty && stationValue.isEmpty || value.isEmpty & stationValue.isNotEmpty)return;
-    _scaffold.currentState.showSnackBar(SnackBar(
-      content: Text(value),
-    ));
   }
 
   void onHome(){
@@ -161,9 +147,9 @@ class _MainScreenState extends State<MainScreen>{
     }));
   }
 
-  void goArt(){
+  void goCategory(){
     Navigator.push(context, MaterialPageRoute(builder: (context){
-      return Art();
+      return MyCategory();
     }));
   }
 }
@@ -189,7 +175,7 @@ bottomNav(cb, rcb, acb){
             ),
           Expanded(
               child: GestureDetector(
-                child: Icon(Icons.settings_applications),
+                child: Icon(Icons.category),
                 onTap: (){acb();},
               ),
             )
